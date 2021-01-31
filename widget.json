@@ -1,0 +1,118 @@
+{
+  "JWTToken": {
+    "type": "text",
+    "label": "Enter JWT Token",
+    "value": "",
+    "group": "JWT Token"
+  },
+  "commands": {
+    "type": "text",
+    "label": "Command List Command",
+    "value": "!cmds",
+    "group": "Commands List"
+  },
+	"commandsCooldown": {
+    "type": "text",
+    "label": "Rally Price Command",
+    "value": "!rly",
+    "group": "Rally Price"
+  },
+  "rallyPriceCommandCooldown": {
+    "type": "number",
+    "label": "Rally Price Command Cooldown [in seconds]",
+    "value": "10",
+    "min":"0",
+    "max":"10000",
+    "group": "Rally Price"
+  },
+  "creatorCoinSymbol": {
+    "type": "text",
+    "label": "CCoin Symbol",
+    "value": "SKOT",
+    "group": "CCoin"
+  },
+  "creatorCoinPriceCommand": {
+    "type": "text",
+    "label": "CCoin Price Command",
+    "value": "!ccp",
+    "group":"CCoin Price"
+  },
+  "creatorCoinPriceCommandCooldown": {
+    "type": "number",
+    "label": "CCoin Price Cooldown [in seconds]",
+    "value": "10",
+    "min":"0",
+    "max":"10000",
+    "group":"CCoin Price"
+  },
+  "creatorCoin": {
+    "type": "text",
+    "label": "CCoin Info",
+    "value": "!cc",
+    "group":"CCoin"
+  },
+  "creatorCoinCooldown": {
+    "type": "number",
+    "label": "CCoin Info Cooldown [in seconds]",
+    "value": "10",
+    "min":"0",
+    "max":"10000",
+    "group":"CCoin"
+  },
+  "creatorCoinTransactionsCommand": {
+    "type": "text",
+    "label": "CCoin Transactions Command",
+    "value": "!cct",
+    "group":"CCoin Transactions"
+  },
+  "creatorCoinTransactionsCommandCooldown": {
+    "type": "number",
+    "label": "CCoin Transactions Command Cooldown [in seconds]",
+    "value": "10",
+    "min":"0",
+    "max":"10000",
+    "group":"CCoin Transactions"
+  },
+  "creatorCoinSupportersCommand": {
+    "type": "text",
+    "label": "CCoin Supporters Command",
+    "value": "!ccs",
+    "group":"CCoin Supporters"
+  },
+  "creatorCoinSupportersCommandCooldown": {
+    "type": "number",
+    "label": "CCoin Supporters Command Cooldown [in seconds]",
+    "value": "10",
+    "min":"0",
+    "max":"10000",
+    "group":"CCoin Supporters"
+  },
+  "creatorCoinSupportVolumeCommand": {
+    "type": "text",
+    "label": "CCoin Support Volume Command",
+    "value": "!ccsv",
+    "group":"CCoin Support Volume"
+  },
+  "creatorCoinSupportVolumeCommandCooldown": {
+    "type": "number",
+    "label": "CCoin Support Volume Command Cooldown [in seconds]",
+    "value": "10",
+    "min":"0",
+    "max":"10000",
+    "group":"CCoin Support Volume"
+  },
+  "creatorCoinCountCommand": {
+    "type": "text",
+    "label": "CCoin Count Command",
+    "value": "!ccsv",
+    "group":"CCoin Count"
+  },
+  "creatorCoinCountCommandCooldown": {
+    "type": "number",
+    "label": "CCoin Support Volume Command Cooldown [in seconds]",
+    "value": "10",
+    "min":"0",
+    "max":"10000",
+    "group":"CCoin Count"
+  }
+}
