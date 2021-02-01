@@ -180,7 +180,7 @@ window.addEventListener("onEventReceived", function(o) {
                                             coinLinkCommandCooldown: coinLinkCommandCooldown
                                     })
                                 } else {
-                                    sayMessage(`https://www.rally.io/creator/${coinLinkArgs[0]}/?inputType=${coinLinkArgs[1]}&amount=${coinLinkArgs[2]}&note=${coinLinkArgs[3]}`), setTimeout(function() {
+                                    sayMessage(`https://www.rally.io/creator/${coinLinkArgs[0]}/?inputType=${coinLinkArgs[1]}&amount=${coinLinkArgs[2]}&note=${encodeURI(coinLinkArgs[3])}`), setTimeout(function() {
                                             coinLinkCommandCooldown = !1
                                     }, 1e3 * {
                                             coinLinkCommandCooldown: coinLinkCommandCooldown
