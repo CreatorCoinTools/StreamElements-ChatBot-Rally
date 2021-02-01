@@ -9,7 +9,7 @@ let fieldData = {},
     creatorCoinSupportersCommandCooldown = !1,
     creatorCoinSupportVolumeCommandCooldown = !1,
     creatorCoinCountCommandCooldown = !1,
-	  coinLinkCommandCooldown = !1;
+	coinLinkCommandCooldown = !1;
 
 window.addEventListener("onWidgetLoad", function(o) {
     fieldData = o.detail.fieldData
