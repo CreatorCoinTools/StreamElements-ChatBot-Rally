@@ -9,7 +9,7 @@ let fieldData = {},
     creatorCoinSupportersCommandCooldown = !1,
     creatorCoinSupportVolumeCommandCooldown = !1,
     creatorCoinCountCommandCooldown = !1,
-	coinLinkCommandCooldown = !1;
+		coinLinkCommandCooldown = !1;
 
 window.addEventListener("onWidgetLoad", function(o) {
     fieldData = o.detail.fieldData
@@ -137,16 +137,16 @@ window.addEventListener("onEventReceived", function(o) {
             })
         }
 			
-        if (o.detail.event.data.text.includes(fieldData.coinLink) && 0 == coinLinkCommandCooldown) {
+        if (o.detail.event.data.text.includes(fieldData.coinLinkCommand) && 0 == coinLinkCommandCooldown) {
             coinLinkCommandCooldown = !0;
-            if (o.detail.event.data.text == fieldData.coinLink) {
+            if (o.detail.event.data.text == fieldData.coinLinkCommand) {
                     sayMessage("To generate a custom coin link, type $coinlink <CoinName> <COIN/USD> <Amount> <Memo>"), setTimeout(function() {
                         coinLinkCommandCooldown = !1
                     }, 1e3 * {
                         coinLinkCommandCooldown: coinLinkCommandCooldown
                     })
             } else {
-                let coinLinkArgs = fieldData.coinLink.match(/\<[\w \/]+\>/g),
+                let coinLinkArgs = fieldData.coinLinkCommand.match(/\<[\w \/]+\>/g),
                     errors = [];
         
                 if (coinLinkArgs.length !== 4) {
