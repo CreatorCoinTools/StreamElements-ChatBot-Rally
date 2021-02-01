@@ -114,5 +114,19 @@
     "min":"0",
     "max":"10000",
     "group":"CCoin Count"
-  }
+  },	
+  "coinLinkCommand": {
+    "type": "text",
+    "label": "Coin Link",
+    "value": "$coinlink",
+    "group": "Coin Link Command"
+  },
+  "coinLinkCommandCooldown": {
+    "type": "number",
+    "label": "Coin Link Command Cooldown [in seconds]",
+    "value": "10",
+    "min": "0",
+    "max": "10000",
+    "group": "Coin Link Command"
+	}
 }
