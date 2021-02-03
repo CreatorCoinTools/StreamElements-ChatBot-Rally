@@ -156,11 +156,11 @@ window.addEventListener("onEventReceived", function(o) {
                             coinLinkCommandCooldown: coinLinkCommandCooldown
                         })
                 } else {
-                    let coinNameReq = new XMLHTTPRequest();
-                    coinNameReq.open("GET", `https://api.rally.io/v1/creator_coins/${coinLinkArgs[0]}/summary`), coinNameReq.send(), coinNameReq.onreadystatechange = (t => {
+                    const coinNameReq = new XMLHttpRequest;
+                    coinNameReq.open("GET", `https://api.rally.io/v1/creator_coins/${coinLinkArgs[0]}/network_activity`), coinNameReq.send(), coinNameReq.onreadystatechange = (t => {
                         if (4 == coinNameReq.readyState && 200 == coinNameReq.status) {
                             let t = JSON.parse(coinNameReq.responseText);
-                            if (t.length) {
+                            if (t && t.length) {
                                 if ((new Date() - new Date(t[0].createdDate)) / (1000 * 3600 * 24) > 7) {
                                     errors.push("invalid coin type");
                                 }
