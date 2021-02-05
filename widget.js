@@ -9,7 +9,7 @@ let fieldData = {},
     creatorCoinSupportersCommandCooldown = !1,
     creatorCoinSupportVolumeCommandCooldown = !1,
     creatorCoinCountCommandCooldown = !1,
-		coinLinkCommandCooldown = !1;
+    coinLinkCommandCooldown = !1;
 
 window.addEventListener("onWidgetLoad", function(o) {
     fieldData = o.detail.fieldData
@@ -136,62 +136,63 @@ window.addEventListener("onEventReceived", function(o) {
                 }
             })
         }
+
+        let coinLinkHelpResponse = `To generate a custom coin link, type ${fieldData.coinLinkCommand} <CoinName> <COIN/USD> <Amount> <Memo>`;
 			
-        if (o.detail.event.data.text.includes(fieldData.coinLinkCommand) && 0 == coinLinkCommandCooldown) {
+        if (o.detail.event.data.text.includes(fieldData.coinLinkCommand) && o.detail.event.data.text !== coinLinkHelpResponse && 0 == coinLinkCommandCooldown) {
             coinLinkCommandCooldown = !0;
             if (o.detail.event.data.text == fieldData.coinLinkCommand) {
-                    sayMessage("To generate a custom coin link, type $coinlink <CoinName> <COIN/USD> <Amount> <Memo>"), setTimeout(function() {
+                sayMessage(coinLinkHelpResponse), setTimeout(function() {
+                    coinLinkCommandCooldown = !1
+                }, 1e3 * {
+                    coinLinkCommandCooldown: coinLinkCommandCooldown
+                })
+            } else {
+                let splitEventData = o.detail.event.data.text.split(' ');
+                let coinLinkArgs = splitEventData.slice(1, 4);
+                coinLinkArgs.push(splitEventData.slice(4).join(' '));
+
+                let errors = [];
+        
+                if (coinLinkArgs.length !== 4) {
+                    sayMessage(`The number of arguments is incorrect.`), setTimeout(function() {
                         coinLinkCommandCooldown = !1
                     }, 1e3 * {
                         coinLinkCommandCooldown: coinLinkCommandCooldown
                     })
-            } else {
-                let coinLinkArgs = fieldData.coinLinkCommand.match(/\<[\w \/]+\>/g),
-                    errors = [];
-        
-                if (coinLinkArgs.length !== 4) {
-                        sayMessage(`The number of arguments is incorrect.`), setTimeout(function() {
-                            coinLinkCommandCooldown = !1
-                        }, 1e3 * {
-                            coinLinkCommandCooldown: coinLinkCommandCooldown
-                        })
                 } else {
                     const coinNameReq = new XMLHttpRequest;
                     coinNameReq.open("GET", `https://api.rally.io/v1/creator_coins/${coinLinkArgs[0]}/network_activity`), coinNameReq.send(), coinNameReq.onreadystatechange = (t => {
                         if (4 == coinNameReq.readyState && 200 == coinNameReq.status) {
                             let t = JSON.parse(coinNameReq.responseText);
+
                             if (t && t.length) {
                                 if ((new Date() - new Date(t[0].createdDate)) / (1000 * 3600 * 24) > 7) {
-                                    errors.push("invalid coin type");
+                                    errors.push("invalid coin");
                                 }
-    
-                                if (coinLinkArgs[1] !== "<COIN>" || coinLinkArgs[1] !== "<USD>") {
-                                    errors.push("invalid coin type");
-                                }
-                                    
-                                if (!/^<[0-9]+>$]/.test(coinLinkArgs[2])) {
-                                    errors.push("invalid amount");
-                                }
-    
-                                if (errors.length) {
-                                    sayMessage(`Error(s): ${errors.join(', ')}`), setTimeout(function() {
-                                            coinLinkCommandCooldown = !1
-                                    }, 1e3 * {
-                                            coinLinkCommandCooldown: coinLinkCommandCooldown
-                                    })
-                                } else {
-                                    sayMessage(`https://www.rally.io/creator/${coinLinkArgs[0]}/?inputType=${coinLinkArgs[1]}&amount=${coinLinkArgs[2]}&note=${encodeURI(coinLinkArgs[3])}`), setTimeout(function() {
-                                            coinLinkCommandCooldown = !1
-                                    }, 1e3 * {
-                                            coinLinkCommandCooldown: coinLinkCommandCooldown
-                                    })
-                                }
-        
                             } else {
-                                sayMessage(`Error(s): invalid coin type`), setTimeout(function() {
-                                        coinLinkCommandCooldown = !1
+                                errors.push("invalid coin");
+                            }
+
+                            if (["COIN", "USD"].indexOf(coinLinkArgs[1]) == -1) {
+                                errors.push("invalid currency type");
+                            }
+                                
+                            if (!/^[0-9]+$/.test(coinLinkArgs[2])) {
+                                errors.push("invalid amount");
+                            }
+
+                            if (errors.length) {
+                                sayMessage(`Error(s): ${errors.join(', ')}`), setTimeout(function() {
+                                    coinLinkCommandCooldown = !1
                                 }, 1e3 * {
-                                        coinLinkCommandCooldown: coinLinkCommandCooldown
+                                    coinLinkCommandCooldown: coinLinkCommandCooldown
+                                })
+                            } else {
+                                sayMessage(`https://www.rally.io/creator/${coinLinkArgs[0].toUpperCase()}/?inputType=${coinLinkArgs[1]}&amount=${coinLinkArgs[2]}&note=${encodeURIComponent(coinLinkArgs[3]).replace(/[!'()*]/g, (c) => '%' + c.charCodeAt(0).toString(16))}`), setTimeout(function() {
+                                    coinLinkCommandCooldown = !1
+                                }, 1e3 * {
+                                    coinLinkCommandCooldown: coinLinkCommandCooldown
                                 })
                             }
                         }
