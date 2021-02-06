@@ -168,11 +168,11 @@ window.addEventListener("onEventReceived", function(o) {
 
                             if (!t || t.length == 0) {
                                 errors.push("invalid coin");
-                            } else if (!t.filter(coin => coin.coinSymbol == coinLinkArgs[0]).length) {
+                            } else if (!t.filter(coin => coin.coinSymbol == coinLinkArgs[0].toUpperCase()).length) {
                                 errors.push("invalid coin");
                             }
 
-                            if (["COIN", "USD"].indexOf(coinLinkArgs[1]) == -1) {
+                            if (["COIN", "USD"].indexOf(coinLinkArgs[1].toUpperCase()) == -1) {
                                 errors.push("invalid currency type");
                             }
                                 
