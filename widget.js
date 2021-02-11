@@ -137,7 +137,7 @@ window.addEventListener("onEventReceived", function(o) {
             })
         }
 
-        let coinLinkHelpResponse = `To generate a custom coin link, type ${fieldData.coinLinkCommand} <CoinName> <COIN/USD> <Amount> <Memo>`;
+        let coinLinkHelpResponse = `To generate a custom coin link, type ${fieldData.coinLinkCommand} <CoinName> <COINS/USD> <Amount> <Memo>`;
 			
         if (o.detail.event.data.text.includes(fieldData.coinLinkCommand) && o.detail.event.data.text !== coinLinkHelpResponse && 0 == coinLinkCommandCooldown) {
             coinLinkCommandCooldown = !0;
@@ -172,7 +172,7 @@ window.addEventListener("onEventReceived", function(o) {
                                 errors.push("invalid coin");
                             }
 
-                            if (["COIN", "USD"].indexOf(coinLinkArgs[1].toUpperCase()) == -1) {
+                            if (["COINS", "USD"].indexOf(coinLinkArgs[1].toUpperCase()) == -1) {
                                 errors.push("invalid currency type");
                             }
                                 
